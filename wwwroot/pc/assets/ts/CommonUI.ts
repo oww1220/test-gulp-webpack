@@ -2,7 +2,9 @@ import '@babel/polyfill';
 import * as Type_CommonUI from 'Type_CommonUI';
 import jQuery from 'jquery';
 import 'jqueryui';
-import { IScroll } from 'iscroll';
+import 'slick-carousel';
+import IScroll from 'iscroll';
+import Swiper from 'swiper';
 
 namespace CommonUI {
     export const $: JQueryStatic = jQuery;
@@ -425,7 +427,7 @@ namespace CommonUI {
             this.cash = this.cash ? this.cash : CommonUI.Map.init();
             $(target).each((idx: number, item) => {
                 const targetIdx = $(target)[idx];
-
+                //console.log(IScroll);
                 targetIdx.iscrolls = new IScroll(item, option);
                 //console.log(item);
                 this.cash!.put(this.num++, { sort: item, option: option });

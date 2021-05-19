@@ -70,7 +70,7 @@ declare module 'iscroll' {
         disablePointer?: boolean;
         disableTouch?: boolean;
     }
-    declare class IScroll {
+    class IScroll {
         constructor (element: string, options?: IScrollOptions);
         constructor (element: HTMLElement, options?: IScrollOptions);
         x: number;
@@ -94,4 +94,6 @@ declare module 'iscroll' {
         on(type: string, fn: (evt?: any) => void): void;
         off(type: string, fn?: (evt?: any) => void): void;
     }
+
+    export default IScroll;
 };

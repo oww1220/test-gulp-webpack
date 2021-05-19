@@ -62,7 +62,10 @@ gulp.task('webpack', ()=>
         },
         output: {filename: '[name].bundle.js'},
         */
-        output: {filename: 'UI.bundle.js'},
+        output: {
+            filename: 'UI.bundle.js',
+            chunkFilename: '[name].chunk.js',
+        },
         resolve: {
             extensions: ['.js']
         },

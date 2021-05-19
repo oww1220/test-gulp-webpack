@@ -4,7 +4,6 @@ import CommonUI from '../CommonUI';
 // ---- Datepicker ---- //
 $(() => {
     const { Event } = CommonUI;
-    console.dir($);
     Event.calander(
         '.datepicker',
         {
