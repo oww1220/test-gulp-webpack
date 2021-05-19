@@ -1,0 +1,596 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title></title>
+
+    <!--
+    <script defer type="text/javascript" src="./assets/scripts/bundle/jquery.bundle.js"></script>
+    <script defer type="text/javascript" src="./assets/scripts/jquery/jquery-1.9.1.min.js"></script>
+    <script defer type="text/javascript" src="./assets/scripts/jquery/jquery-ui.min.js"></script>
+    <script defer type="text/javascript" src="./assets/scripts/jquery/plugins/swiper.min.js"></script>
+    <script defer type="text/javascript" src="./assets/scripts/jquery/plugins/slick.min.js"></script>
+    <script defer type="text/javascript" src="./assets/scripts/jquery/plugins/iscroll.js"></script>-->
+
+
+    <!--
+    <script defer type="text/javascript" src="./assets/scripts/build/dist/browser.js"></script>
+	<script defer type="text/javascript" src="./assets/scripts/build/dist/CommonUI.js"></script>
+	<script defer type="text/javascript" src="./assets/scripts/build/dist/UI.js"></script>
+    <script defer type="text/javascript" src="./assets/scripts/bundle/CommonUI.bundle.js"></script>-->
+    <script defer type="text/javascript" src="./assets/scripts/bundle/UI.bundle.js"></script>
+
+</head>
+<body>
+
+<div id="root">
+    
+
+    <div class="col">
+        <h2>레이어 팝업</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, CommonUI.js</h3>
+        <div class="cont">
+
+            <style>
+                body.fixed {overflow: hidden; position: fixed;}
+                .pop_layer {position: fixed;display:none;z-index: 110;width:100%;left:0;max-width: 480px;max-width:30rem;}
+                .pop_layer .pop_inner {overflow: hidden;border-radius: 10px;border-radius:0.625rem;background-color:#f4f4f4;margin:15px;margin:0.9375rem;position: relative;}
+                .pop_layer .pop_cont {padding:65px 20px 40px;padding:4.0625rem 1.25rem 2.5rem;position: relative;-webkit-box-sizing:border-box;box-sizing:border-box;}
+                .pop_layer .pop_cont .btn_wrap .full {width:100%;}
+                .layer_dimmed {position: fixed;left: 0;top: 0;width: 100%;height: 100%;background-color: #000;font: 0/0 a;opacity: 0.7;z-index: 100;display:none;}
+            </style>
+
+            <button type="button" id="layer_open1">레이어 열기1</button>
+            <button type="button" id="layer_open2" data-layer="layer-common">레이어 열기2</button>
+
+            <!--레이어 본체-->
+            <div class="pop_layer layer-common">
+                <div class="pop_inner">
+                    <div class="pop_scroll">
+        
+                        <div class="pop_cont">
+                            
+                            <div class="btn_wrap">
+                                <a href="javascript:void(0)" class="close_window">확인</a>
+                                <a href="javascript:void(0)" class="close_layer_link" id="layer_close1">취소</a>
+                            </div>
+        
+                        </div>
+                        <button type="button" class="layer_close_bt" id="layer_close2" data-layer="layer-common">닫기</button>	
+                        
+                    </div>
+                </div>
+            </div>
+            <!--//레이어 본체-->
+
+            <!--레이어 배경-->
+            <div class="layer_dimmed">레이어 배경</div>
+            <!--//레이어 배경-->
+
+            <!--
+            <script>
+                var TOUCH_EVENT = ('ontouchstart' in window) ? 'touchstart' : 'click',
+                    LAYER_DIM = '.layer_dimmed',
+                    LAYER_PARENT = '.pop_layer';
+
+                //1
+                $(document).on('click', '#layer_open1', function(){
+                    CommonUI.layer.open('.layer-common', LAYER_DIM, LAYER_PARENT, function(){
+                        console.log('open');
+                    });
+                });
+                //2
+                CommonUI.layer.openClick('#layer_open2', LAYER_DIM, LAYER_PARENT, function(show){
+                    console.log('open');
+                    show();
+                });
+
+
+                //1
+                $(document).on('click', '#layer_close1', function(){
+                    CommonUI.layer.close('.layer-common', LAYER_DIM, LAYER_PARENT, function(){
+                        console.log('close');
+                    });
+                });
+
+                //2
+                CommonUI.layer.closeClick('#layer_close2', LAYER_DIM, LAYER_PARENT, function(hide){
+                    console.log('close');
+                    hide();
+                });
+
+                $(LAYER_DIM).on('click', function(e){
+                    CommonUI.layer.close(LAYER_DIM, LAYER_DIM, LAYER_PARENT, function(){
+                        console.log('close');
+                    });
+                });
+            </script>-->
+
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>탭 변경</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+            </style>
+
+            <div class="tab_nav tab-normal">
+                <ul class="clear_both">
+                    <li class="on">
+                        <a href="#">진행중 이벤트</a>
+                    </li>
+                    <li class="">
+                        <a href="#">종료된 이벤트</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab_cont tab-normal">
+                <div>진행중 이벤트 내용</div>
+                <div style="display: none;">
+
+                    <div class="tab_nav tab-normal2">
+                        <ul class="clear_both">
+                            <li class="on">
+                                <a href="#">진행중 기획전</a>
+                            </li>
+                            <li class="">
+                                <a href="#">종료된 기획전</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab_cont tab-normal2">
+                        <div>진행중 기획전 내용</div>
+                        <div style="display: none;">종료된 기획전 내용</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--
+            <script>
+                CommonUI.event.taps('.tab-normal', function(swap){
+                    console.log('taps');
+                    swap();
+                });
+                CommonUI.event.taps('.tab-normal2', function(swap){
+                    console.log('taps');
+                    swap();
+                });
+            </script>-->
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>탑으로 버튼</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+                .btnTop {position: fixed;top: auto;left: auto;bottom: 35px;right: 35px;margin-left: 0;z-index: 2;display:none;}
+                .btnTop a {display: block;width: 70px;height: 70px;}
+            </style>
+
+            <div class="btnTop"><a href="#">탑으로</a></div>
+            <!---
+            <script>
+                var $BODY = $('body'),
+                    $GOTOP = $('.btnTop');
+                    
+                /*top으로*/
+                CommonUI.event.goTop($GOTOP);
+                
+                /*pc top으로 scroll*/
+                CommonUI.event.topScrollCh($GOTOP, $BODY);
+                $(window).on('scroll', function(){
+                    CommonUI.event.topScrollCh($GOTOP, $BODY);
+                });
+            </script>-->
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>토글</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+
+            </style>
+            <div class="toggle_btn" data-target="questions_target01" data-on="true"><button type="button">기본 슬라이드 토글1</button></div>
+            <div class="toggle_cont questions_target01">토글1 내용</div>
+            <div class="toggle_btn" data-target="questions_target02" data-on="true"><button type="button">기본 슬라이드 토글2</button></div>
+            <div class="toggle_cont questions_target02">토글2 내용</div>
+            <!--
+            <script>
+	            CommonUI.event.toggle('.toggle_btn', '.toggle_cont', function(logic, layer) {
+                    console.log('toggle');
+                    logic();
+                });
+            </script>-->
+            <br/>
+            <div class="toggle_btn2" data-target="questions2_target01" data-on="true" data-siblings="true"><button type="button">하나만 열리는 슬라이드 토글1</button></div>
+            <div class="toggle_cont2 questions2_target01">토글1 내용</div>
+            <div class="toggle_btn2" data-target="questions2_target02" data-on="true" data-siblings="true"><button type="button">하나만 열리는 슬라이드 토글2</button></div>
+            <div class="toggle_cont2 questions2_target02">토글2 내용</div>
+            <!--
+            <script>
+                CommonUI.event.toggle('.toggle_btn2', '.toggle_cont2', function(logic, layer) {
+                    console.log('toggle');
+                    logic();
+                });
+            </script>-->
+
+            <br/>
+            <div class="toggle_btn3" data-target="questions3_target01" data-on="true" data-sort="normal"><button type="button">기본 토글(show, hide)</button></div>
+            <div class="toggle_cont3 questions3_target01">토글1 내용</div>
+            <!--
+            <script>
+                CommonUI.event.toggle('.toggle_btn3', '.toggle_cont3', function(logic, layer) {
+                    console.log('toggle');
+                    logic();
+                });
+            </script>-->
+
+            <br/>
+            <div class="toggle_btn4" data-target="questions4_target01" data-on="true" data-sort="fade"><button type="button">fade 토글(fade)</button></div>
+            <div class="toggle_cont4 questions4_target01">토글1 내용</div>
+
+            <!--
+            <script>
+                CommonUI.event.toggle('.toggle_btn4', '.toggle_cont4', function(logic, layer) {
+                    console.log('toggle');
+                    logic();
+                });
+            </script>-->
+
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>rem 설정 및 호스트 환경체크</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+                body{font-size: 1rem;}
+            </style>
+            <!--
+            <script>
+                CommonUI.resize.font();
+                $(function(){
+                    var $BODY = $('body');
+                    /*호스트환경 체크*/
+                    CommonUI.resize.chk($BODY);
+                    CommonUI.resize.resize($BODY);
+                });
+            </script>-->
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>datepicker</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, jquery-ui.min.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+                /* datepicker */
+                .ui-datepicker {display:none; border:1px solid #DDD; border-radius:3px; background-color:#fff; padding:10px; -webkit-border-radius:3px; -moz-border-radius:3px; -ms-border-radius:3px; -o-border-radius:3px;}
+                .ui-datepicker .ui-datepicker-header {position:relative; text-align:center; margin:0 0 10px 0;}
+                .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {background-repeat:no-repeat; background-position:50% 50%; position:absolute; width:30px; height:30px; vertical-align:middle; text-indent:-9999em;}
+                .ui-datepicker .ui-datepicker-prev {left:4.5em; background-image:url("./image/arr_lf_8.png");}
+                .ui-datepicker .ui-datepicker-next {right:4.5em; background-image:url("./image/arr_rf_8.png");}
+                .ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {text-indent:-9999rem;}
+                .ui-datepicker .ui-datepicker-title {margin:0 2.3em; line-height:1.8em; font-size:1.125rem; text-align:center;}
+                .ui-datepicker table {width:100%; border-collapse:collapse; font-size:0.95rem; font-weight:normal; text-align:center;}
+                .ui-datepicker th {font-family:'Noto Sans KR'; font-weight:normal; padding:.7em .3em; border:0;}
+                .ui-datepicker td {border:0; padding:5px; text-align:center; font-weight:normal;}
+                .ui-datepicker th:first-child, .ui-datepicker td:first-child {padding-left:0;}
+                .ui-datepicker th:last-child, .ui-datepicker td:last-child {padding-right:0;}
+                .ui-datepicker td span, .ui-datepicker td a {display:inline-block; width:30px; height:30px; line-height:30px; cursor:pointer;}
+                .ui-state-active, .ui-widget-content .ui-state-active, .ui-state-highlight, .ui-widget-content .ui-state-highlight {background-color:#000; border-radius:50%; -webkit-border-radius:50%; -moz-border-radius:50%; -ms-border-radius:50%; -o-border-radius:50%; color:#fff; font-weight:bold;}
+                .ui-state-disabled, .ui-widget-content .ui-state-disabled {opacity:.5; filter:Alpha(Opacity=5);}
+                .ui-datepicker-trigger {display:inline-block; box-sizing:border-box; border-radius:3px; border:1px solid #DDD; background:#FFF url("./assets/images/btn_date.png") no-repeat center center; width:40px; height:40px; margin-left:5px; text-indent:-9999em; vertical-align:middle;}
+                .ui-state-active, .ui-widget-content .ui-state-active {background-color: #008cd5;}
+                .ui-state-hover {background-color: #f5f5f5;}
+
+                .ui_date {width: 153px;height:38px; line-height:38px;border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; -ms-border-radius:3px; -o-border-radius:3px; background-color:#fff; font-size:14px; border:1px solid #DDD;position: relative;display: inline-block;zoom: 1;*display: inline;vertical-align: middle;}
+                .ui_date input {border: 0;width: 100%;height: 38px;line-height: 36px;vertical-align: top;color: #707070;cursor: pointer;padding:0;}
+                .ui_date .ui-datepicker-trigger {position: absolute;top:0;right:0;border: 0;height: 38px;margin:0;}
+            </style>
+            <div class="ui_date" style="width:200px;">
+                <input type="text" class="datepicker" placeholder="yyyy-mm-dd" />
+            </div>
+            <!--
+            <script>
+                CommonUI.event.calander(".datepicker", {
+                    dateFormat: 'yy-mm-dd',
+                    showMonthAfterYear: true,
+                    changeYear: false,
+                    changeMonth: false,
+                    showOn: "both",
+                    buttonText: "날짜선택",
+                    yearSuffix: '.',
+                    monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                    monthNamesShort: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                },
+                function(e){
+                    console.log("날짜변경됨");
+                });
+
+                /*
+                CommonUI.event.calander('.datepicker', {
+                    changeMonth:true,
+                    changeYear:true,
+                    showOn:'button',
+                    buttonText: '선택',
+                    buttonImageOnly:false,
+                    showMonthAfterYear:true,
+                    minDate:null,  //최소 기간
+                    maxDate:null,  //최대 노출
+                    yearRange:'c-5:c+5',  //노출되는 범위
+                    dateFormat :'yy-mm-dd',
+                    dayNamesMin:['일', '월', '화', '수', '목', '금', '토'],
+                    monthNamesShort: [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ],
+                },
+                function(e){
+                    console.log('날짜변경됨');
+                });*/
+            </script>-->
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>슬라이더 소스적용 예</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, slick.min.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+                /*slick*/
+                .slick-slider {position: relative;display: block;box-sizing: border-box;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;-webkit-touch-callout: none;-khtml-user-select: none;-ms-touch-action: pan-y;touch-action: pan-y;-webkit-tap-highlight-color: transparent;padding: 0;margin: 0;width: 100%;}
+                .slick-list {position: relative;display: block;overflow: hidden;margin: 0;padding: 0;}
+                .slick-list:focus {outline: none;}
+                .slick-list.dragging {cursor: pointer;cursor: hand;}
+                .slick-slider .slick-track,
+                .slick-slider .slick-list {-webkit-transform: translate3d(0, 0, 0);-moz-transform: translate3d(0, 0, 0);-ms-transform: translate3d(0, 0, 0);-o-transform: translate3d(0, 0, 0);transform: translate3d(0, 0, 0);}
+                .slick-track {position: relative;top: 0;left: 0;display: block;}
+                .slick-track:before,
+                .slick-track:after {display: table;content: '';}
+                .slick-track:after {clear: both;}
+                .slick-loading .slick-track {visibility: hidden;}
+                .slick-slide {display: none;float: left;height: 100%;min-height: 1px;}
+                [dir='rtl'] .slick-slide {float: right;}
+                .slick-slide img {display: block;width: 100%;}
+                .slick-slide.slick-loading img {display: none;}
+                .slick-slide.dragging img {pointer-events: none;}
+                .slick-initialized .slick-slide {display: block;}
+                .slick-loading .slick-slide {visibility: hidden;}
+                .slick-vertical .slick-slide {display: block;height: auto;border: 1px solid transparent;}
+                .slick-arrow.slick-hidden {display: none;}
+
+            </style>
+            <div style="max-width: 373px;">
+                <ul class="target1">
+
+                    <li>
+                        <a href="#">
+                            <div class="list_in">
+                                <div class="img_wrap">
+                                    <div class="flag_icon">
+                                        <div class="flag_item yellow">30%<br/>할인</div>
+                                    </div>
+                                    <img src="./assets/images/main_s_bn01.png" alt="이벤트"/>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#">
+                            <div class="list_in">
+                                <div class="img_wrap">
+                                    <img src="./assets/images/main_s_bn02.png" alt="이벤트"/>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#">
+                            <div class="list_in">
+                                <div class="img_wrap">
+                                    <img src="./assets/images/main_s_bn03.png" alt="이벤트"/>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="#">
+                            <div class="list_in">
+                                <div class="img_wrap">
+                                    <img src="./assets/images/main_s_bn02.png" alt="이벤트"/>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <!--
+            <script>
+                /*메인 상단 슬라이드*/
+                if($('.target1').length && $.fn.slick) {
+                    (function(){
+                        CommonUI.slide.init($('.target1'), 'slick', {
+                            infinite: true,
+                            autoplay: true,
+                            arrows: true,
+                            dots: true,
+                        });
+                        $('.target1').on('mouseleave', function(e){
+                            $(this).slick('slickPlay');
+                        });
+                    })();
+                }
+            </script>-->
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>커스텀 셀렉트</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, iscroll.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+                .select_custum {box-sizing:border-box;position: relative;display:inline-block;vertical-align: middle;z-index: 0;}
+                .select_custum.on {z-index: 1;}
+                .select_custum > button {border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; -ms-border-radius:3px; -o-border-radius:3px; border:1px solid #ddd; background:#fff url("././assets/images/icon_select.png"); background-repeat: no-repeat; background-position: right 13px top 50%; height:40px; line-height:38px; padding:0 25px 0 15px; color:#707070;font-size:14px; box-sizing:border-box;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 100%;text-align: left;outline: none;}
+                .select_custum.on > button {border-bottom:1px solid #fff;border-radius:3px 3px 0px 0px;}
+                .select_custum.color > button {color: #008cd5;}
+                .select_custum .select_list {opacity:0;display:block;position: absolute;top: 40px;left: 0;width:100%;max-height: 190px;overflow: hidden;pointer-events: none;}
+                .select_custum.on .select_list {display:block;opacity:1;border:1px solid #ddd;border-top:0;border-radius:0px 0px 3px 3px;background-color: #fff;box-sizing: border-box;
+                pointer-events: all;}
+                .select_custum .select_list ul {position: relative;z-index: 2;width:100%;padding: 0;margin: 0;}
+                .select_custum .select_list ul li {list-style: none;}
+                .select_custum .select_list ul li a {display:block;font-size:14px;height:40px; line-height:38px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding: 1px 15px;text-align: left;color:#707070;}
+                .select_custum .select_list ul li a:hover {color:#19557f;background-color: #f0f3f8;}
+                .iScrollVerticalScrollbar.iScrollLoneScrollbar {right:5px !important;}
+                .iScrollVerticalScrollbar.iScrollLoneScrollbar .iScrollIndicator {background-color: #dadfe7 !important;}
+            </style>
+
+            <div class="select_custum" style="width:110px;">
+                <button type="button">선택1</button>
+                <input type="hidden" id="" value=""/>
+                <div class="select_list" >
+                    <div>
+                        <ul>
+                            <li>
+                                <a href="#" data-val="1">구분(전체)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="2">진행</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="3">진행 Drop</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="4">완료</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="select_custum" style="width:160px;">
+                <button type="button">선택2</button>
+                <input type="hidden" id="" value=""/>
+                <div class="select_list" >
+                    <div>
+                        <ul>
+                            <li>
+                                <a href="#" data-val="1">제품군(전체)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="2">의류청정기_고급형</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="3">제품군(전체)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="4">의류청정기_고급형</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="5">제품군(전체)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="6">의류청정기_고급형</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="7">제품군(전체)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-val="8">의류청정기_고급형</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <script>
+                CommonUI.event.customSelect(".select_custum");
+
+                $(window).on("load", function(){
+                    /*아이스크롤*/
+                    if($(".select_custum .select_list").length){
+                        CommonUI.iscrolls.init(".select_custum .select_list", { 
+                            scrollbars: true,
+                            mouseWheel: true,
+                            interactiveScrollbars: true,
+                            shrinkScrollbars: 'scale',
+                            fadeScrollbars: true,
+                            hScroll:false
+                        });	
+                    }
+                });
+            </script>-->
+        </div>
+    </div>
+    <br/><br/>
+    <div class="col">
+        <h2>커스텀 셀렉트(기본 인풋사용)</h2>
+        <h3>필요모듈: jquery-1.9.1.min.js, CommonUI.js</h3>
+        <div class="cont">
+            <style>
+                .sort_select {position: relative;display:inline-block;vertical-align: middle;}
+                .sort_select select {display: block;opacity: 0;position: absolute;left: 0;top: 0;z-index: 1;width: 100%;height: 100%;direction: ltr;margin:0 !important;background: 0}
+                .sort_select .selText {border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px; -ms-border-radius:3px; -o-border-radius:3px; border:1px solid #ddd; background:#fff url("./assets/images/icon_select.png"); background-repeat: no-repeat; background-position: right 13px top 50%; height:40px; line-height:38px; padding:0 35px 0 15px; font-size:14px; box-sizing:border-box;}
+                .sort_select.color .selText {color:#008cd5;}
+            </style>
+
+            <div class="sort_select color">
+                <select name="" id="">
+                    <option class="bestSubCate1" data-name="품질종합분석시스템" value="1">품질종합분석시스템</option>
+                    <option class="bestSubCate2" data-name="통합품질정보" value="2">통합품질정보</option>
+                    <option class="bestSubCate3" data-name="Q-Report" value="3">Q-Report</option>
+                    <option class="bestSubCate4" data-name="품질지표" value="4">품질지표</option>
+                    <option class="bestSubCate5" data-name="공지사항" value="5">공지사항</option>
+                    <option class="bestSubCate6" data-name="자료실" value="6">자료실</option>
+                    <option class="bestSubCate7" data-name="Q&amp;A" value="7">Q&amp;A</option>
+                </select>
+                <div class="selText" data-name="품질종합분석시스템">품질종합분석시스템</div>
+            </div>
+            <!--
+            <script>
+                CommonUI.event.changeSelect(".sort_select select");
+            </script>-->
+        </div>
+    </div>
+
+
+
+    <br/><br/>
+    <div class="col">
+        <h2></h2>
+        <div class="cont">
+            <style>
+
+            </style>
+
+
+            <script>
+
+            </script>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+</body>
+</html>
