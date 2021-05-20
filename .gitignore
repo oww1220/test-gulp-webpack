@@ -9,6 +9,7 @@
 /coverage
 
 # production
+/docs
 /build
 /wwwroot/pc/assets/scripts/build
 /wwwroot/pc/assets/mo

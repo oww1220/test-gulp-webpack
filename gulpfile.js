@@ -10,6 +10,14 @@ const sourcemaps = require('gulp-sourcemaps');
 
 /*view server*/
 const browserSync = require('browser-sync').create();
+browserSync.init({
+    //logLevel: 'debug',
+    port: 3330,
+    open: false,
+    directory: true,
+    server: './wwwroot/',
+    browser: 'google chrome',
+});
 
 /*scss, css*/
 const sass = require('gulp-sass');
@@ -28,7 +36,7 @@ const ts = require('gulp-typescript');
 
 /*webpack*/
 const webpack = require('webpack-stream');
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const errorHandler = (error)=>{
     console.error(error.message);
@@ -75,9 +83,21 @@ gulp.task('webpack', ()=>
         output: {
             filename: 'UI.bundle.js',
             chunkFilename: '[name].chunk.js',
+            //chunkFilename: '[name].chunk.[chunkhash].js',
         },
         resolve: {
             extensions: ['.js']
+        },
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    commons: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: 'vendors',
+                        chunks: 'all'
+                    }
+                }
+            }
         },
         devtool: 'source-map',
         module: {   
@@ -89,7 +109,16 @@ gulp.task('webpack', ()=>
                 }
             ]
         },
-        //plugins: [new ForkTsCheckerWebpackPlugin()]
+        plugins: [
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static',               // 분석결과를 파일로 저장
+                reportFilename: 'docs/size_dev.html', // 분설결과 파일을 저장할 경로와 파일명 지정
+                defaultSizes: 'parsed',
+                openAnalyzer: false,                   // 웹팩 빌드 후 보고서파일을 자동으로 열지 여부
+                generateStatsFile: true,              // 웹팩 stats.json 파일 자동생성
+                statsFilename: 'docs/stats_dev.json', // stats.json 파일명 rename
+            })
+        ]
     }))
     .pipe(gulp.dest(`${TASK_BASE_URL}/scripts/bundle`))
     .pipe(browserSync.reload({ stream: true }))
@@ -138,16 +167,6 @@ gulp.task('clean', ()=>
 
 // watch: 소스 옵져빙(소스변경 감지해서 task실행및 서버 재시작)
 gulp.task('watch', ()=> {
-
-    //서버실행
-    browserSync.init({
-        //logLevel: 'debug',
-        port: 3330,
-        open: false,
-        directory: true,
-        server: './wwwroot/',
-        browser: 'google chrome',
-    });
 
     // watch sass
     gulp.watch(
