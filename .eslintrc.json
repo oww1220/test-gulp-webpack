@@ -7,9 +7,10 @@
         "jquery": true
     },
     "extends": [
-        "eslint:recommended"
+        "eslint:recommended",
+        "prettier"
     ],
-    "plugins": [],
+    "plugins": ["prettier"],
     "settings": {
         "react": {
         "version": "detect"

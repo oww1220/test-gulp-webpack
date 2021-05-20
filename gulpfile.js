@@ -6,9 +6,18 @@ const del = require('del');
 /*유틸*/
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
 
 /*view server*/
 const browserSync = require('browser-sync').create();
+
+/*scss, css*/
+const sass = require('gulp-sass');
+sass.compiler = require('node-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const modifyCssUrls = require('gulp-modify-css-urls');
+const pxtorem = require('gulp-pxtorem');
+const cssnano = require('gulp-cssnano');
 
 
 /*오류 처리*/
@@ -31,6 +40,7 @@ const plumberOption = {
 
 
 
+const autoprefixBrowsers = ['> 0%', 'last 4 versions'];
 const BASE_URL = `./wwwroot/${URL}`;
 const TASK_BASE_URL = `${BASE_URL}/assets`;
 
@@ -85,16 +95,39 @@ gulp.task('webpack', ()=>
     .pipe(browserSync.reload({ stream: true }))
 );
 
-// concat: 제이쿼리 코어및 사용 플러그인들 머지 -- 선택
-gulp.task('jquery:concat', ()=>
+
+// sass: sass컴파일러, px-->rem, autoprefixer 
+gulp.task('sass', ()=>
     gulp
-    .src(`${TASK_BASE_URL}/scripts/jquery/**/*.js`)
+    .src(`${TASK_BASE_URL}/scss/**/*.scss`)
     .pipe(plumber(plumberOption))
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(concat('jquery.bundle.js'))
-    .pipe(uglify())
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(`${TASK_BASE_URL}/scripts/bundle`))
+    .pipe(
+        sass({
+            outputStyle: 'compressed', //[nested, compact, expanded, compressed]
+            //indentType: 'tab',
+            //indentWidth: 1,
+        }).on('error', sass.logError)
+    )
+    .pipe(cssnano())
+    .pipe(pxtorem({
+            propList: ['*', '!'], // (Array) Use wildcard * to enable all properties. Use ! to not match a property. 
+            rootValue: 16, // (Number | Function) Represents the root element font size
+            replace: false, //  (Boolean) Replaces rules containing rems instead of adding fallbacks.
+            minPixelValue: 2, // (Number) Set the minimum pixel value to replace.
+            mediaQuery: false // (Boolean) Allow px to be converted in media queries.
+        }
+    ))
+    .pipe(
+        autoprefixer({
+            browsers: autoprefixBrowsers,
+            cascade: true,
+        })
+	)
+    //.pipe(concat('UI.bundle.css'))
+    .pipe(sourcemaps.write('./maps'))
+    .pipe(gulp.dest(`${TASK_BASE_URL}/styles`))
+    .pipe(browserSync.reload({ stream: true }))
 );
 
 
@@ -109,17 +142,23 @@ gulp.task('watch', ()=> {
     //서버실행
     browserSync.init({
         //logLevel: 'debug',
-        port: 3333,
+        port: 3330,
         open: false,
         directory: true,
         server: './wwwroot/',
         browser: 'google chrome',
     });
 
+    // watch sass
+    gulp.watch(
+        `${TASK_BASE_URL}/scss/**/*.scss`,
+        gulp.series('sass')
+    );
+
     // watch ts
     gulp.watch(
         `${BASE_URL}/**/*.ts`,
-        gulp.series('ts', 'webpack')
+        gulp.series('ts', 'webpack', 'clean')
     );
 
     // watch html
@@ -129,5 +168,5 @@ gulp.task('watch', ()=> {
 // task 묶어서 실행
 gulp.task(
     'default',
-    gulp.series('ts', 'webpack', 'watch')
+    gulp.series('sass', 'ts', 'webpack', 'clean', 'watch')
 );

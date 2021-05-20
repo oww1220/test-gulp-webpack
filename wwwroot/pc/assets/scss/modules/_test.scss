@@ -1,0 +1,77 @@
+.cont00 {
+    width: 600px !important;
+    @include Flex-start-start($wrap: wrap);
+    li {
+        width: 50% !important;
+    }
+    &:after {
+        @include Background($sprite: 'arr_lf_8', $position: right center);
+        display: block;
+        content: '';
+        width: 20px;
+        height: 20px;
+    }
+}
+.cont01 {
+    height: 200px;
+    @include Flex-center-center;
+}
+.cont01-2 {
+    height: 200px;
+    @include Flex-start-center;
+}
+.cont01-3 {
+    height: 200px;
+    @include Flex-start-start;
+}
+.cont01-4 {
+    height: 200px;
+    @include Flex-end-center;
+}
+.cont01-5 {
+    height: 200px;
+    @include Flex-center-start;
+}
+.cont01-6 {
+    height: 200px;
+    @include Flex-center-end;
+}
+.cont01-7 {
+    height: 200px;
+    @include Flex-between-start;
+}
+.cont01-8 {
+    height: 200px;
+    @include Flex-between-center;
+}
+.cont01-9 {
+    height: 200px;
+    @include Flex-between-end;
+}
+.cont01-10 {
+    height: 200px;
+    @include Flex-around-start;
+}
+
+.cont02 {
+    height: 300px;
+    @include Flex-center-center($flow: column);
+}
+.cont03 {
+    height: 300px;
+    @include Flex-start-center($flow: column);
+}
+.cont04 {
+    height: 300px;
+    @include Flex-start-start($flow: column);
+}
+
+.cont05 {
+    height: 300px;
+    @include Flex-start-start($display: inline-flex);
+}
+
+.cont06 {
+    height: 300px;
+    @include Flex-start-center($display: inline-flex);
+}
