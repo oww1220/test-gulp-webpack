@@ -81,20 +81,36 @@ gulp.task('webpack', ()=>
         output: {filename: '[name].bundle.js'},
         */
         output: {
-            filename: 'UI.bundle.js',
-            chunkFilename: '[name].chunk.js',
+            filename: '[name].chunk.js',
             //chunkFilename: '[name].chunk.[chunkhash].js',
         },
         resolve: {
+            //웹팩이 모듈을 찾을때 확장자가 없을시 해당 배열에 있는 확장자를 붙여서 찾게하는기능!
             extensions: ['.js']
         },
         optimization: {
             splitChunks: {
+                chunks: 'all',
+                maxInitialRequests: Infinity,
+                minSize: 0,
                 cacheGroups: {
-                    commons: {
+                    vendors: {
                         test: /[\\/]node_modules[\\/]/,
                         name: 'vendors',
-                        chunks: 'all'
+                        priority: 1,
+                        reuseExistingChunk: true,
+                    },
+                    slide: {
+                        test: /[\\/]node_modules[\\/](swiper|iscroll|slick-carousel)[\\/]/,
+                        name: 'slide',
+                        priority: 2,
+                        reuseExistingChunk: true,
+                    },
+                    jquery: {
+                        test: /[\\/]node_modules[\\/](jquery)[\\/]/,
+                        name: 'jquery',
+                        priority: 2,
+                        reuseExistingChunk: true,
                     }
                 }
             }
