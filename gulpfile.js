@@ -111,6 +111,12 @@ gulp.task('webpack', ()=>
                         name: 'jquery',
                         priority: 2,
                         reuseExistingChunk: true,
+                    },
+                    jqueryui: {
+                        test: /[\\/]node_modules[\\/](jqueryui)[\\/]/,
+                        name: 'jqueryui',
+                        priority: 2,
+                        reuseExistingChunk: true,
                     }
                 }
             }
