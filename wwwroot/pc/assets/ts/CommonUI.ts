@@ -379,7 +379,7 @@ namespace CommonUI {
                 }
             });
         },
-        fixedTop: function () {
+        fixedTop() {
             let enScrollTop = 0,
                 beScrollTop = 0;
             const $header = $('#header'),

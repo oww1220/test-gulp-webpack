@@ -1,4 +1,5 @@
 const URL = 'pc';
+const path = require("path");
 
 const gulp = require('gulp');
 const del = require('del');
@@ -47,6 +48,8 @@ const plumberOption = {
 };
 
 
+//console.log(1111, path.resolve(__dirname, 'wwwroot'));
+
 
 const autoprefixBrowsers = ['> 0%', 'last 4 versions'];
 const BASE_URL = `./wwwroot/${URL}`;
@@ -85,6 +88,11 @@ gulp.task('webpack', ()=>
             //chunkFilename: '[name].chunk.[chunkhash].js',
         },
         resolve: {
+            //모듈 절대경로 설정: 배열 첫번째 항목은 로컬(사용자)모듈, 두번째 항목은 node모듈
+            modules: [
+                path.join(__dirname, 'wwwroot/pc/assets/scripts/build'),
+                'node_modules'
+            ],
             //웹팩이 모듈을 찾을때 확장자가 없을시 해당 배열에 있는 확장자를 붙여서 찾게하는기능!
             extensions: ['.js']
         },
