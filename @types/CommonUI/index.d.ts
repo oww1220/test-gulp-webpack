@@ -1,28 +1,3 @@
-declare module 'Type_CommonUI' {
-    interface Iiscrolls {
-        cash: IJqMap | null;
-        num: number;
-        init(target: string, option: IObj): void;
-        resize(): void;
-    }
-    interface IJqMap {
-        map: IObj | null;
-        put<T>(key:string | number, value: T): void;
-        get<T>(key:string | number): T;
-        containsKey(key:string | number): boolean;
-        clear(): void;
-        remove(key:string | number): void;
-        keys(): (string | number)[];
-        values(): any[];
-        size(): number;
-    }
-
-    /*type*/
-    type SwiperParam = string | HTMLElement;
-    type slideSortParam = 'slick' | 'swiper';
-    
-}
-
 declare module 'CommonUI' {
     export interface IJqMap {
         map: IObj | null;
@@ -35,10 +10,16 @@ declare module 'CommonUI' {
         values(): any[];
         size(): number;
     }
-    /*type*/
     export type SwiperParam = string | HTMLElement;
     export type slideSortParam = 'slick' | 'swiper';
 
+    export interface Iiscrolls {
+        cash: IJqMap | null;
+        num: number;
+        init(target: string, option: IObj): void;
+        resize(): void;
+    }
+    /*
     export interface ILayer {
         scrollTop: number;
         calculate(layer: string): void;
@@ -71,12 +52,7 @@ declare module 'CommonUI' {
         changeSelect(target: string): void;
         fixedTop(): void;
     }
-    export interface Iiscrolls {
-        cash: IJqMap | null;
-        num: number;
-        init(target: string, option: IObj): void;
-        resize(): void;
-    }
+    
     export interface IAsync {
         generaterRun(gen: () => Generator): void;
         wait(ms: number, value?: any): Promise<any>;
@@ -101,4 +77,6 @@ declare module 'CommonUI' {
     }
 
     export default CommonUI;
+    */
 }
+

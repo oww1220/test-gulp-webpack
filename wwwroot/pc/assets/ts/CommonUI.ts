@@ -1,5 +1,5 @@
 import '@babel/polyfill';
-import * as Type_CommonUI from 'Type_CommonUI';
+import { IJqMap, Iiscrolls, SwiperParam, slideSortParam } from 'CommonUI';
 import jQuery from 'jquery';
 import 'jqueryui';
 import 'slick-carousel';
@@ -35,7 +35,7 @@ namespace CommonUI {
     };
     export const Map = {
         init() {
-            class JqMap implements Type_CommonUI.IJqMap {
+            class JqMap implements IJqMap {
                 map: IObj | null = null;
                 constructor() {
                     this.map = new Object();
@@ -92,7 +92,7 @@ namespace CommonUI {
         },
     };
     export const Slide = {
-        init(target: Type_CommonUI.SwiperParam, sort: Type_CommonUI.slideSortParam, option?: IObj) {
+        init(target: SwiperParam, sort: slideSortParam, option?: IObj) {
             if (sort == 'slick' && typeof target === 'string') {
                 const $target = $(target);
                 return $target.slick(option!);
@@ -420,7 +420,7 @@ namespace CommonUI {
             });
         },
     };
-    export const Iscrolls: Type_CommonUI.Iiscrolls = {
+    export const Iscrolls: Iiscrolls = {
         cash: null,
         num: 0,
         init(target, option) {
