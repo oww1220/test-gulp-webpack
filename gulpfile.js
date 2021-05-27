@@ -88,11 +88,17 @@ gulp.task('webpack', ()=>
             //chunkFilename: '[name].chunk.[chunkhash].js',
         },
         resolve: {
+            //별칭으로 절대경로 설정
+            alias: {
+                '@src': path.resolve(__dirname, 'wwwroot/pc/assets/scripts/build')
+            },
+            /*
             //모듈 절대경로 설정: 배열 첫번째 항목은 로컬(사용자)모듈, 두번째 항목은 node모듈
             modules: [
                 path.join(__dirname, 'wwwroot/pc/assets/scripts/build'),
                 'node_modules'
-            ],
+            ],*/
+
             //웹팩이 모듈을 찾을때 확장자가 없을시 해당 배열에 있는 확장자를 붙여서 찾게하는기능!
             extensions: ['.js']
         },

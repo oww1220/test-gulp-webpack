@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import CommonUI from '../CommonUI';
+import CommonUI from '@src/CommonUI';
 
 // ---- RemCaculate ---- //
 //rem 설정 및 호스트 환경체크

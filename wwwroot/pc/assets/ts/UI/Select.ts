@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import CommonUI from '../CommonUI';
+import CommonUI from '@src/CommonUI';
 
 // ---- Select ---- //
 $(() => {

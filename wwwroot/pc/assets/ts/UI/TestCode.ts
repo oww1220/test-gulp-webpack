@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import CommonUI from '../CommonUI';
-import * as Const from '../Lib/Const';
+import CommonUI from '@src/CommonUI';
+import * as Const from '@src/Lib/Const';
 
 const log = console.log;
 
