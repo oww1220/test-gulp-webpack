@@ -53,7 +53,7 @@ $extra-small-devices: 320px;
 }
 
 @mixin Flex-center-start($display: flex, $wrap: nowrap, $flow: row) {
-    @include Flex-config($justify: center);
+    @include Flex-config($justify: center, $display: $display, $wrap: $wrap, $flow: $flow);
 }
 @mixin Flex-center-center($display: flex, $wrap: nowrap, $flow: row) {
     @include Flex-config($justify: center, $align: center, $display: $display, $wrap: $wrap, $flow: $flow);
